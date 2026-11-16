@@ -1,11 +1,15 @@
+from collections.abc import Callable
+
 import flet as ft
 
 
-def image_placeholder(filename: str, width: int = 121, height: int = 121) -> ft.Image:
+def image_placeholder(
+    filename: str, width: int | None = 121, height: int | None = 121
+) -> ft.Image:
     return ft.Image(
         src=filename,
-        width=width,
-        height=height,
+        width=width if width is not None else 240,
+        height=height if height is not None else 121,
         fit=ft.BoxFit.CONTAIN,
         error_content=ft.Container(
             content=ft.Text(f"Dodaj do assets:\n{filename}", size=11),
@@ -18,7 +22,7 @@ def image_placeholder(filename: str, width: int = 121, height: int = 121) -> ft.
     )
 
 
-def build_page() -> ft.Control:
+def build_page(on_next: Callable[[], None]) -> ft.Control:
     faces = [
         ("lewa", "Lewa ściana", "LEFT (L) (w tym przypadku zielona)"),
         ("prawa", "Prawa ściana", "RIGHT (R) (w tym przypadku niebieska)"),
@@ -59,12 +63,12 @@ Poniższe rysunki pokazują każdą ze ścian, jej położenie, nazwę angielsk�
                 controls=[
                     image_placeholder("informacjeogolne_rozwalona.gif"),
                     ft.Text("""W przypadku nie ułożonej kostki na rysunku obok następujące ściany są w kolorach:
-                            LEWA: niebieska
-                            PRAWA: zielona
-                            GÓRNA: czerwona
-                            DOLNA: pomarańczowa
-                            PRZEDNIA: biała
-                            TYLNA (tutaj niewidoczna): żółta""", expand=True),
+LEWA: niebieska
+PRAWA: zielona
+GÓRNA: czerwona
+DOLNA: pomarańczowa
+PRZEDNIA: biała
+TYLNA (tutaj niewidoczna): żółta""", expand=True),
                 ],
                 spacing=24,
                 vertical_alignment=ft.CrossAxisAlignment.CENTER,
@@ -78,6 +82,11 @@ POMARAŃCZOWA naprzeciw CZERWONEJ."""),
             ft.Text("""Warto zapamiętać tą informację, ponieważ może stać się ona pomocna kiedy już będziemy układać kostkę z pamięci. Nie będziemy musieli kręcić kostką, aby dowiedzieć się jaka ściana leży po drugiej stronie.
 
 To tyle tytułem informacji wstępnych. Możemy rozpocząć układanie kostki. Metoda przedstawiona przeze mnie w poradniku nosi nazwę LBL (Layer By Layer) czyli warstwa po warstwie. Jest to najdłuższa, bo składająca się aż z 8 etapów metoda, ale za to najłatwiejsza ze wszystkich i każdy może jej się nauczyć."""),
+            ft.Button(
+                content="Etap 1 - biały krzyż",
+                icon=ft.Icons.ARROW_FORWARD,
+                on_click=on_next,
+            ),
         ],
         spacing=16,
         scroll=ft.ScrollMode.AUTO,

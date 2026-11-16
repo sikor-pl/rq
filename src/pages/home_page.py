@@ -21,5 +21,6 @@ W swoim poradniku wprowadziłem innowacyjną metodę pokazywania kostki. Dzięki
             ft.Text("Mam nadzieję, że zamieszczony przeze mnie kurs jest jasny, nawet dla zupełnie początkujących i do prowadzi on do skutecznego ułożenia kostki Rubika.")
         ],
         spacing=16,
+        scroll=ft.ScrollMode.AUTO,
         expand=True,
     )
