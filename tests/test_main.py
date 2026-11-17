@@ -4,7 +4,13 @@ import flet as ft
 import flet.testing as ftt
 
 from main import main
-from pages import permutacja_naroznikow, permutacja_zoltego_krzyza
+from pages import home_page, permutacja_naroznikow, permutacja_zoltego_krzyza
+
+
+def test_homepage_image_uses_asset_relative_path():
+    page = home_page.build_page()
+    image = next(control for control in page.controls if isinstance(control, ft.Image))
+    assert image.src == "wstep1.gif"
 
 
 async def test_expandable_menu_navigation(flet_app: ftt.FletTestApp):

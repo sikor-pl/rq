@@ -13,7 +13,7 @@ W przyszłości planuję także dodanie filmików instruktażowych dotyczących 
 W swoim poradniku wprowadziłem innowacyjną metodę pokazywania kostki. Dzięki zastosowaniu rozciągniętej perspektywy w moich rysunkach poglądowych widać aż 5 ścian kostki jednocześnie. W rzeczywistości taki rzut na sześcian jest niemożliwy, jednak ułatwia on układającemu zapoznanie się z aktualnym ułożeniem kolorów na kostce jednocześnie na wszystkich pięciu ścianach.
 """),
             ft.Image(
-                src="assets/wstep1.gif",
+                src="wstep1.gif",
                 width=261,
                 height=121,
                 fit=ft.BoxFit.CONTAIN,
