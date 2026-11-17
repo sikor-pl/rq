@@ -11,14 +11,26 @@ def build_page(on_next: Callable[[], None]) -> ft.Control:
             ft.Text("Etap 1 - biały krzyż", size=32, weight=ft.FontWeight.BOLD),
             ft.Text("""Biały krzyż polega na ułożeniu krzyża składającego się z białych klocków, oraz odpowiednie dopasowanie go kolorystycznie do pozostałych 4 ścian kostki.
 Poniższy obrazek pokazuje, co należy uzyskać z pomieszanej kostki (kolory szare to klocki, które są nieistotne, nie mają znaczenia na tym etapie)."""),
-            image_placeholder("bialy_krzyz_cotojest.gif", width=None, height=None),
+            ft.Image(
+                src="bialy_krzyz_cotojest.gif",
+                # width=451,
+                fit=ft.BoxFit.CONTAIN,
+                error_content=ft.Text("Dodaj do assets: bialy_krzyz_2.gif"),
+            ),            
+            # image_placeholder("bialy_krzyz_cotojest.gif", width=451, height=None),
             ft.Text("""Ułożenie pierwszego z etapów nie powinno sprawić większych kłopotów bez żadnych poradników. Jednak jako że jest to poradnik dla zupełnie początkujących, opiszę całą procedurę układania białego krzyża.
 Zaznaczam jednak, że podana przeze mnie metoda jest najprostsza, ale nie jest najszybsza. Z pewnością z czasem wyrobisz sobie własną i znacznie szybszą metodę układania krzyża.
 
 Zaczynamy od znalezienia białej ścianki, którą od tej chwili będziemy trzymać u góry.
 Znajdujemy pozostałe białe klocki krawędziowe i przerzucamy je na białą ścianę tworząc krzyż - na razie jednak nie zwracamy uwagi na zgodność ich kolorów z bocznymi ścianami.
 Powinieneś uzyskać coś takiego jak na rysunku poniżej. Jest to biały krzyż nieprawidłowo spermutowany gdyż jego klocki niekoniecznie leżą na właściwych miejscach."""),
-            image_placeholder("bialy_krzyz_1.gif", width=None, height=None),
+            # image_placeholder("bialy_krzyz_1.gif", width=None, height=None),
+            ft.Image(
+                src="bialy_krzyz_1.gif",
+                # width=451,
+                fit=ft.BoxFit.CONTAIN,
+                error_content=ft.Text("Dodaj do assets: bialy_krzyz_2.gif"),
+            ),            
             ft.Text("Jeżeli masz problemy z ułożeniem krzyża, poniżej kilka ruchów pomocnych przy jego ułożeniu:"),
             ft.Image(
                 src="bialy_krzyz_2.gif",

@@ -1,3 +1,5 @@
+from collections.abc import Callable
+
 import flet as ft
 
 
@@ -10,7 +12,7 @@ def illustration(number: int) -> ft.Image:
     )
 
 
-def build_page() -> ft.Control:
+def build_page(on_next: Callable[[], None]) -> ft.Control:
     return ft.Column(
         controls=[
             ft.Text("Etap 3 - druga warstwa", size=32, weight=ft.FontWeight.BOLD),
@@ -35,6 +37,11 @@ Może ci się też zdarzyć sytuacja, że po włożeniu dwóch klocków zostaną
             ft.Text("""W tym przypadku postępujemy analogicznie jak w powyższym przypadku - najpierw wyrzucamy jeden z klocków do prawej warstwy, wstawiamy go na miejsce i wstawiamy na miejsce ostatni klocek.
 
 To już koniec etapu 3 - możesz przejść do kolejnego"""),
+            ft.Button(
+                            content="Etap 4 - żółty krzyż",
+                            icon=ft.Icons.ARROW_FORWARD,
+                            on_click=on_next,
+                        ),
             # ft.Text("Statystyki drugiej warstwy", size=24, weight=ft.FontWeight.BOLD),
             # ft.Text("Miejsce na opis statystyk."),
             # ft.Row(
@@ -73,6 +80,11 @@ metoda working corner: 3 ruchy + 3 ruchy + 3 ruchy + 8 ruchów = 17 ruchów
 Wykonujemy zatem połowę mniej ruchów niż przy metodzie klasycznej. Mnie jednak ta metoda nie przekonała i pomimo większej ilości ruchów układam metodą klasyczną, ale wybór należy do Ciebie...
 
 Kolejny etap"""),
+            ft.Button(
+                content="Etap 4 - żółty krzyż",
+                icon=ft.Icons.ARROW_FORWARD,
+                on_click=on_next,
+            ),
         ],
         spacing=16,
         scroll=ft.ScrollMode.AUTO,

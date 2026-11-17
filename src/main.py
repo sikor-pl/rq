@@ -1,3 +1,6 @@
+import os
+from pathlib import Path
+
 import flet as ft
 
 from pages import (
@@ -6,12 +9,24 @@ from pages import (
     home_page,
     informacje_wstepne,
     narozniki_bialej_sciany,
+    ostatnia_permutacja,
+    permutacja_naroznikow,
+    permutacja_zoltego_krzyza,
+    orientacja_naroznikow,
     settings_page,
+    zolty_krzyz,
 )
 
 
 def main(page: ft.Page):
     page.title = "Nawigacja Flet"
+
+    pdf_filename = "3x3x3_algorytmy_druk.pdf"
+    if page.web:
+        pdf_url = pdf_filename
+    else:
+        assets_dir = Path(os.environ.get("FLET_ASSETS_DIR", Path(__file__).parent / "assets"))
+        pdf_url = (assets_dir / pdf_filename).resolve().as_uri()
 
     page_builders = (
         home_page.build_page,
@@ -19,7 +34,12 @@ def main(page: ft.Page):
         settings_page.build_page,
         lambda: bialy_krzyz.build_page(lambda: navigate_to(4)),
         lambda: narozniki_bialej_sciany.build_page(lambda: navigate_to(5)),
-        druga_warstwa.build_page,
+        lambda: druga_warstwa.build_page(lambda: navigate_to(6)),
+        lambda: zolty_krzyz.build_page(lambda: navigate_to(7)),
+        lambda: permutacja_zoltego_krzyza.build_page(lambda: navigate_to(8)),
+        lambda: permutacja_naroznikow.build_page(lambda: navigate_to(9)),
+        lambda: orientacja_naroznikow.build_page(lambda: navigate_to(10)),
+        ostatnia_permutacja.build_page,
     )
     page_content = ft.Container(
         content=page_builders[0](),
@@ -68,14 +88,14 @@ def main(page: ft.Page):
             ft.ListTile(
                 key=f"nav-white-cross{suffix}",
                 title="Etap 1 - biały krzyż",
-                leading=ft.Icons.LOOKS_ONE_OUTLINED,
+                leading=ft.Icons.FILTER_1_OUTLINED,
                 dense=True,
                 on_click=click_handler(3),
             ),
             ft.ListTile(
                 key=f"nav-white-corners{suffix}",
                 title="Etap 2 - narożniki białej ściany",
-                leading=ft.Icons.LOOKS_TWO_OUTLINED,
+                leading=ft.Icons.FILTER_2_OUTLINED,
                 dense=True,
                 on_click=click_handler(4),
             ),
@@ -83,9 +103,44 @@ def main(page: ft.Page):
                 key=f"nav-second-layer{suffix}",
                 
                 title="Etap 3 - druga warstwa",
-                leading=ft.Icons.LOOKS_3_OUTLINED,
+                leading=ft.Icons.FILTER_3_OUTLINED,
                 dense=True,
                 on_click=click_handler(5),
+            ),
+            ft.ListTile(
+                key=f"nav-yellow-cross{suffix}",
+                title="Etap 4 - żółty krzyż",
+                leading=ft.Icons.FILTER_4_OUTLINED,
+                dense=True,
+                on_click=click_handler(6),
+            ),
+            ft.ListTile(
+                key=f"nav-yellow-cross-permutation{suffix}",
+                title="Etap 5 - permutacja żółtego krzyża",
+                leading=ft.Icons.FILTER_5_OUTLINED,
+                dense=True,
+                on_click=click_handler(7),
+            ),
+            ft.ListTile(
+                key=f"nav-corner-permutation{suffix}",
+                title="Etap 6 - permutacja narożników",
+                leading=ft.Icons.FILTER_6_OUTLINED,
+                dense=True,
+                on_click=click_handler(8),
+            ),
+            ft.ListTile(
+                key=f"nav-corner-orientation{suffix}",
+                title="Etap 7 - orientacja narożników",
+                leading=ft.Icons.FILTER_7_OUTLINED,
+                dense=True,
+                on_click=click_handler(9),
+            ),
+            ft.ListTile(
+                key=f"nav-last-permutation{suffix}",
+                title="Etap 8 - ostatnia permutacja",
+                leading=ft.Icons.FILTER_8_OUTLINED,
+                dense=True,
+                on_click=click_handler(10),
             ),
         ]
         return [
@@ -96,7 +151,25 @@ def main(page: ft.Page):
                 key=f"nav-cube{suffix}",
                 title="Kostka 3x3",
                 leading=ft.Icons.LOOKS_3,
-                controls=[items[1], items[3], items[4], items[5]],
+                controls=[
+                    items[1],
+                    items[3],
+                    items[4],
+                    items[5],
+                    items[6],
+                    items[7],
+                    items[8],
+                    items[9],
+                    items[10],
+                    ft.ListTile(
+                        key=f"nav-print-version{suffix}",
+                        title="Wersja do druku",
+                        leading=ft.Icons.PRINT_OUTLINED,
+                        dense=True,
+                        url=ft.Url(pdf_url, target=ft.UrlTarget.BLANK),
+                        on_click=lambda e: close_menu(e),
+                    ),
+                ],
             ),
             items[2],
         ], items

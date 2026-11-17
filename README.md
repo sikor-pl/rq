@@ -18,6 +18,8 @@ uv run flet run --web
 
 For more details on running the app, refer to the [Getting Started Guide](https://flet.dev/docs/).
 
+The 3x3 menu includes a printable PDF, which opens in the default PDF viewer or a new browser tab.
+
 ## Build the app
 
 ### Android
